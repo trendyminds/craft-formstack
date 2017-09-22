@@ -1,0 +1,49 @@
+{#
+/**
+ * Formstack plugin for Craft CMS
+ *
+ * FormstackFieldType HTML
+ *
+ * @author    TrendyMinds
+ * @copyright Copyright (c) 2017 TrendyMinds
+ * @link      https://trendyminds.com
+ * @package   Formstack
+ * @since     1.0.0
+ */
+#}
+{% import '_includes/forms' as forms %}
+{% set selectedForm = '' %}
+
+{# Span wrapper with .select class so it inherits the select styles from Craft. #}
+<span class="select">
+  <select name="{{ name }}[selected]" id="{{ name }}[selected]">
+      {% if values is empty %}
+        <option value="" disabled selected>Select Form</option>
+      {% endif %}
+    
+      {% for option in options %}
+        <option value="{{ option.value }}"{% if values.selected is defined ? values.selected == option.value %} selected{% endif %}>{{ option.label }}</option>
+    
+        {% if values.selected is defined ? values.selected == option.value %}
+          {% set selectedForm = option.value %}
+        {% endif %}
+      {% endfor %}
+    </select>
+</span>
+
+{# .text class so it inherits the input styles from Craft. #}
+<textarea name="{{ name }}[edited]" id="{{ name }}[edited]" class="text formstack__textarea" rows="40">{{ values.edited is defined ? values.edited }}</textarea>
+
+{# So we can call the fields in JS no matter the ID namespace served from Craft. #}
+{% set js %}  
+  let $select = document.getElementById("{{ namespacedId }}[selected]");
+  let $textarea = document.getElementById("{{ namespacedId }}[edited]");
+
+  $select.addEventListener('change', function() {
+    Craft.postActionRequest('formstack/getForm/returnForm?data=' + $select.value, function(response) {
+      $textarea.value = response;
+    });
+  });
+{% endset %}
+
+{% includeJs js %}

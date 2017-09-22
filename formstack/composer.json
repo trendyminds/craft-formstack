@@ -1,0 +1,14 @@
+{
+	"name": "trendyminds/formstack",
+	"description": "Plugin to connect to Formstack and display available forms in a dropdown field type.",
+	"type": "craft-plugin",
+	"authors": [
+		{
+			"name": "TrendyMinds",
+			"homepage": "https://trendyminds.com"
+		}
+	],
+	"require": {
+		"composer/installers": "~1.0"
+	}
+}

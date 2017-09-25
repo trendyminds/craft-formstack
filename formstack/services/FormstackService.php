@@ -47,6 +47,11 @@ class FormstackService extends BaseApplicationComponent
                 return "Unable to get forms at this time.";
             } else {
                 $fsFormObj = json_decode($fsFormResults);
+                
+                // alpha order
+                usort($fsFormObj->forms, function($a, $b) {
+                    return strcmp(strtolower($a->name), strtolower($b->name));
+                });
     
                 return $fsFormObj->forms;
             }    

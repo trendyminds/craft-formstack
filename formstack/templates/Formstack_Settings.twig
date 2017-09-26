@@ -1,0 +1,28 @@
+{#
+/**
+ * Formstack plugin for Craft CMS
+ *
+ * Formstack Settings.twig
+ *
+ * @author    TrendyMinds
+ * @copyright Copyright (c) 2017 TrendyMinds
+ * @link      https://trendyminds.com
+ * @package   Formstack
+ * @since     1.0.0
+ */
+#}
+
+{% import "_includes/forms" as forms %}
+
+<h2>
+  Formstack Settings
+</h2>
+
+{{ forms.textField({
+  label: 'OAuth Token',
+  required: true,
+  instructions: 'If you do not have one, you can generate one <a href="https://www.formstack.com/admin/apiKey/main" target="_blank">via the API settings in Formstack</a>.',
+  name: 'oauthToken',
+  value: settings.oauthToken,
+  errors: settings.getErrors('oauthToken')
+}) }}

@@ -2,8 +2,6 @@
 
 Plugin to connect to Formstack and display available forms in a dropdown field type.
 
-![Screenshot](resources/screenshots/plugin_logo.png)
-
 ## Installation
 
 To install Formstack, follow these steps:
